@@ -9,11 +9,12 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
-from pathlib import Path
+import os
+from unipath import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))#Path(__file__).resolve().parent.parent #ancestor(3)
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,10 +38,15 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     
 ]
 
 LOCAL_APPS = [
+        #'apps.users',
+        'apps.usuario',
+        'apps.mascota',
+        'apps.adopcion',
 
 ]
 
@@ -65,7 +71,7 @@ ROOT_URLCONF = 'Proyecto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,15 +130,39 @@ TIME_ZONE = 'America/Guatemala'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
+
+#AUTH_USER_MODEL = 'users.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+#MEDIA_ROOT = BASE_DIR.child('media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+
+LOGIN_REDIRECT_URL = reverse_lazy('adopcion:solicitud_listar')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
+
+#LOGIN_REDIRECT_URL = reverse_lazy('solicitud_listar')
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'jose.goncas4@hotmail.com'
+EMAIL_HOST_PASSWORD = 'marcosgc10'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+#LOGIN_URL = 'login'
+#LOGOUT_URL = 'logout'
