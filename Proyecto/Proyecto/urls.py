@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetCompleteView, PasswordResetDoneView, PasswordResetConfirmView, logout_then_login
 from django.urls import include, path, re_path
+from django.urls import reverse_lazy
 
 
 urlpatterns = [
