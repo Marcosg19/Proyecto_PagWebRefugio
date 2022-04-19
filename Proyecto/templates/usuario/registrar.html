@@ -1,67 +1,101 @@
 {% extends 'base/base.html' %}
 
+{% block title %}
+Registro-Refugio de animales
+{% endblock %}
+{% block navbar%}
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand" href="{% url 'home' %}">HOME</a>
+		<button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	</button>
+	</div>
+</nav>
+{% endblock %}
+
 {% block content %}
 <br>
-<h2>Registro de usuarios</h2>
-<form method="post">
-	{% csrf_token %}
-	
-	<div class="row">
-		<div class="col-md-10 col-md-offset-2">
-			<div class="form-group">
-				<label>Nombre</label>
-				<input class="form-control" type="text" name="first_name">
+<br>
+<br>
+<br>
+<section class="page-section" id="registro">
+	<div class="container">
+		<!-- Contact Section Heading-->
+		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registro de usuario</h2>
+		<!-- Icon Divider-->
+		<div class="divider-custom">
+			<div class="divider-custom-line"></div>
+			<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+			<div class="divider-custom-line"></div>
+		</div>
+		<!-- Contact Section Form-->
+		<div class="row justify-content-center">
+			<div class="col-lg-8 col-xl-7">
+				<form method="POST" id="registroForm" data-sb-form-api-token="API_TOKEN">
+					{% csrf_token %}
+					<div class="form-floating mb-3">
+						<input class="form-control" id="first_name" name="first_name" type="text" placeholder="Nombre" data-sb-validations="required" />
+						<label for="first_name">Nombre</label>
+						<div class="invalid-feedback" data-sb-feedback="first_name:required">Se requiere un nombre.</div>
+					</div>
+
+					<div class="form-floating mb-3">
+						<input class="form-control" id="last_name" name="last_name" type="text" placeholder="Nombre" data-sb-validations="required" />
+						<label for="last_name">Apellidos</label>
+						<div class="invalid-feedback" data-sb-feedback="last_name:required">Se requieren apellidos.</div>
+					</div>
+
+					<div class="form-floating mb-3">
+						<input class="form-control" id="username" name="username" type="text" placeholder="Nombre" data-sb-validations="required" />
+						<label for="username">Nombre de usuario</label>
+						<div class="invalid-feedback" data-sb-feedback="username:required">Se requiere un nombre de usuario.</div>
+					</div>
+
+					<div class="form-floating mb-3">
+                        <input class="form-control" id="email" name ="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                        <label for="email">Correo electrónico</label>
+                        <div class="invalid-feedback" data-sb-feedback="email:required">Se requiere un email.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">El correo no es válido.</div>
+                    </div>
+
+					<div class="form-floating mb-2">
+						<input class="form-control" id="password1" name="password1" type="password" placeholder="Password" data-sb-validations="required,password1" />
+						<label for="password1">Contraseña</label>
+						<div class="invalid-feedback" data-sb-feedback="password1:required">Se requiere una contraseña.</div>
+						<div class="invalid-feedback" data-sb-feedback="password1:password1">La contraseña no es válido.</div>
+					</div>
+
+					<div class="form-floating mb-2">
+						<input class="form-control" id="password2" name="password2" type="password" placeholder="Password" data-sb-validations="required,password2" />
+						<label for="password2">Confirmar contraseña</label>
+						<div class="invalid-feedback" data-sb-feedback="password2:required">Se requiere una contraseña.</div>
+						<div class="invalid-feedback" data-sb-feedback="password2:password2">La contraseña no es válido.</div>
+					</div>
+
+					<div class="d-none" id="submitSuccessMessage"></div>
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">¡Error al Registrarse!</div></div>
+                    <div class="row">
+						<div class="col-md-10 col-md-offset-2">
+							<div class="form-group">
+								<button class="btn btn-primary btn-xl" id="submitButton" type="submit">Guardar</button>
+							</div>
+								{% if user.is_authenticated %}
+									<a href="{% url 'home' %}"></a>
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Hola {{ user.username }}
+										<span class="caret"></span>
+									</a>
+									<div class="dropdown-menu" aria-labelledby="download">
+										<a class="dropdown-item" href="{% url 'logout' %}"> Salir</a>
+									</div>
+                        		{% else %}
+									<li><a href="{% url 'usuario:registrar' %}"></a>Error al registrarse</li>
+								{% endif %}
+							<br>
+						</div>
+					</div>		
+				</form>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-2">
-			<div class="form-group">
-				<label >Apellidos</label>
-				<input class="form-control" type="text" name="last_name">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-2">
-			<div class="form-group">
-				<label >Nombre de usuario</label>
-				<input class="form-control" type="text" name="username">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-2">
-			<div class="form-group">
-				<label >Correo</label>
-				<input class="form-control" type="text" name="email">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-2">
-			<div class="form-group">
-				<label >Contraseña</label>
-				<input class="form-control" type="password" name="password1">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-2">
-			<div class="form-group">
-				<label >Confirmar contraseña</label>
-				<input class="form-control" type="password" name="password2">
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-10 col-md-offset-2">
-			<div class="form-group">
-				<button class="btn btn-primary "type="submit">Guardar</button>
-			</div>
-		</div>
-	</div>
-	
-</form>
+</section>
 {% endblock %}

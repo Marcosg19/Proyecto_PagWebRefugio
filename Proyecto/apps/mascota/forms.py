@@ -8,6 +8,7 @@ class MascotaForm(forms.ModelForm):
 
         fields = [
             'nombre',
+            'raza',
             'sexo',
             'edad_aproximada',
             'fecha_rescate',
@@ -16,6 +17,7 @@ class MascotaForm(forms.ModelForm):
         ]
         labels = {
             'nombre': 'Nombre',
+            'raza' : 'Raza',
             'sexo':'Sexo',
             'edad_aproximada': 'Edad aproximada',
             'fecha_rescate': 'Fecha de rescate',
@@ -25,6 +27,7 @@ class MascotaForm(forms.ModelForm):
         widgets = {
             
             'nombre':forms.TextInput(attrs={'class':'form-control'}),
+            'raza':forms.TextInput(attrs={'class':'form-control'}), 
             'sexo':forms.TextInput(attrs={'class':'form-control'}),
             'edad_aproximada':forms.TextInput(attrs={'class':'form-control'}),
             'fecha_rescate':forms.TextInput(attrs={'class':'form-control'}),

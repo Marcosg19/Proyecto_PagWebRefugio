@@ -11,6 +11,7 @@ class Vacuna(models.Model):
 
 class Mascota(models.Model):
     nombre = models.CharField(max_length=50)
+    raza = models.CharField(max_length=30)
     sexo = models.CharField(max_length=10)
     edad_aproximada = models.IntegerField()
     fecha_rescate = models.DateField()

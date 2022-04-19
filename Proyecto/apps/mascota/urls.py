@@ -9,6 +9,7 @@ app_name = 'mascota'
 urlpatterns = [
     re_path(r'^$', index, name='index'),
     re_path(r'^nuevo$', login_required(MascotaCreate.as_view()), name='mascota_crear'),
+    
     re_path(r'^listar', login_required(MascotaList.as_view()), name='mascota_listar'),
     re_path(r'^editar/(?P<pk>\d+)/$', login_required(MascotaUpdate.as_view()), name='mascota_editar'),
     re_path(r'^eliminar/(?P<pk>\d+)/$', login_required(MascotaDelete.as_view()), name='mascota_eliminar'),

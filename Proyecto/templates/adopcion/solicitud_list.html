@@ -21,8 +21,8 @@
                         <td>{{solicitud.numero_mascotas}}</td>
                         <td>{{solicitud.razones}}</td>
                         <td>
-                                        <a href="{% url 'solicitud_editar' solicitud.id %}" class="btn btn-primary">Editar</a>
-                                        <a href="{% url 'solicitud_eliminar' solicitud.id %}" class="btn btn-danger">Eliminar</a>
+                                        <a href="{% url 'adopcion:solicitud_editar' solicitud.id %}" class="btn btn-primary">Editar</a>
+                                        <a href="{% url 'adopcion:solicitud_eliminar' solicitud.id %}" class="btn btn-danger">Eliminar</a>
                         </td>
                 </tr>
                 {% endfor %}

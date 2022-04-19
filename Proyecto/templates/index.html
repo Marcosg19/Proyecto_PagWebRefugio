@@ -1,43 +1,61 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-Mascotas
+Iniciar Sesión-Refugio de animales
 {% endblock %}
 {% block navbar%}
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand" href="{% url 'home' %}">HOME</a>
+		<button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	</button>
+	</div>
+</nav>
 {% endblock %}
 {% block content %}
 <br>
-<h1>Iniciar sesión - Login</h1>
-<form method="post">
-	{% csrf_token %}
-	 <div class="row">
-    	<div class="col-md-6 col-md-offset-3">
-    		<div class="form-group">
-        		<label for="username">Nombre de usuario:</label>
-        		<input class="form-control" type="text" name="username">
-    	   </div>
-        </div>
-    </div>    
-    <div class="row">
-    	<div class="col-md-6 col-md-offset-3">
-    		<div class="form-group">
-        		<label for="username">Contraseña:</label>
-        		<input class="form-control" type="password" name="password">
-    	   </div>
-        </div>
-    </div>
-    <div class="row">
-    	<div class="col-md-6 col-md-offset-3">
-    		<div class="form-group">
-                <a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
-        		<input class="btn btn-primary" type="submit" value="Ingresar">
-    	   </div>
-        </div>
-    </div>
-</form>
-
-<a href="http://{{ request.get_host }}/admin">Ir al Administrador de Django</a>
 <br>
-<a href="{% url 'usuario:registrar' %}">Ir a Registrar usuario</a>
+<br>
+<br>
+<section class="page-section" id="login">
+	<div class="container">
+		<!-- Contact Section Heading-->
+		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Iniciar sesión - Login</h2>
+		<!-- Icon Divider-->
+		<div class="divider-custom">
+			<div class="divider-custom-line"></div>
+			<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+			<div class="divider-custom-line"></div>
+		</div>
+		<!-- Contact Section Form-->
+		<div class="row justify-content-center">
+			<div class="col-lg-8 col-xl-7">
+				<form method="post">
+					{% csrf_token %}
+					<div class="form-floating mb-3">
+						<input class="form-control" name="username" type="text" placeholder="Nombre" data-sb-validations="required" />
+						<label for="username">Nombre de usuario</label>
+						<div class="invalid-feedback" data-sb-feedback="username:required">Se requiere un nombre.</div>
+					</div>
 
+					<div class="form-floating mb-2">
+						<input class="form-control" name="password" type="password" placeholder="Password" data-sb-validations="required,password" />
+						<label for="username">Contraseña</label>
+						<div class="invalid-feedback" data-sb-feedback="password:required">Se requiere una contraseña.</div>
+						<div class="invalid-feedback" data-sb-feedback="password:password">La contraseña no es válido.</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="form-group">
+								<a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
+								<input class="btn btn-primary" type="submit" value="Ingresar">
+						</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
 {% endblock %}
