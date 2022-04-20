@@ -34,6 +34,7 @@ LOCAL_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'captcha'
 ]
 
 
@@ -113,7 +114,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-#AUTH_USER_MODEL = 'users.User'
+#AUTH_USER_MODEL = 'apps.usuario.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -133,7 +134,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
-#LOGIN_REDIRECT_URL = reverse_lazy('solicitud_listar')
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -144,3 +144,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 #LOGIN_URL = 'login'
 #LOGOUT_URL = 'logout'
+
+
+RECAPTCHA_PUBLIC_KEY = '6LcGwYcfAAAAAL5RKPupSbbTxCJC2-ERwpeMtkG7'
+RECAPTCHA_PRIVATE_KEY = '6LcGwYcfAAAAABSvVSPLKA3BT06SZEGDFFr_FU5x'
+NOCAPTCHA= True

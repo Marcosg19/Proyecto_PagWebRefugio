@@ -8,6 +8,7 @@ urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     path('' , LoginView.as_view(template_name= 'home.html'),name= 'home'),
     path('home/', LoginView.as_view(template_name= 'home1.html'),name= 'home1'),
+    path('captcha/', include('captcha.urls')),
     re_path(r'^mascota/', include('apps.mascota.urls', namespace='mascota')),
     re_path(r'^adopcion/', include('apps.adopcion.urls', namespace='adopcion')),
     re_path(r'^usuario/', include('apps.usuario.urls', namespace='usuario')),

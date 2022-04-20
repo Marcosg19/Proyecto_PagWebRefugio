@@ -15,8 +15,6 @@ Iniciar Sesión-Refugio de animales
 {% block content %}
 <br>
 <br>
-<br>
-<br>
 <section class="page-section" id="login">
 	<div class="container">
 		<!-- Contact Section Heading-->
@@ -45,11 +43,19 @@ Iniciar Sesión-Refugio de animales
 						<div class="invalid-feedback" data-sb-feedback="password:password">La contraseña no es válido.</div>
 					</div>
 
+					<div class="mb-3" >
+						<div class="g-recaptcha" data-sitekey="6LcGwYcfAAAAAL5RKPupSbbTxCJC2-ERwpeMtkG7">
+					</div>
+					</div>
+
+
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<div class="form-group">
 								<a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
-								<input class="btn btn-primary" type="submit" value="Ingresar">
+								<br>
+								<br>
+								<input class="btn btn-primary btn-xl" type="submit" value="Ingresar">
 						</div>
 						</div>
 					</div>

@@ -1,5 +1,9 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from captcha.fields import CaptchaField
+from django import forms
+
+
 
 
 class RegistroForm(UserCreationForm):
@@ -18,3 +22,18 @@ class RegistroForm(UserCreationForm):
 				'last_name': 'Apellidos',
 				'email': 'Correo',
 		}
+
+class RegistroRForm(UserCreationForm):
+
+	class Meta:
+		model = User
+		fields = [
+				'username',
+			]
+		labels = {
+				'username': 'Nombre de usuario',
+
+		}
+
+class captchaform(forms.Form):
+    captcha = CaptchaField()

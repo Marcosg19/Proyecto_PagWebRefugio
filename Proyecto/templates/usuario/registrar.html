@@ -71,10 +71,22 @@ Registro-Refugio de animales
 						<div class="invalid-feedback" data-sb-feedback="password2:required">Se requiere una contraseña.</div>
 						<div class="invalid-feedback" data-sb-feedback="password2:password2">La contraseña no es válido.</div>
 					</div>
-
+					
+					
+					
+					<br>
 					<div class="d-none" id="submitSuccessMessage"></div>
                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">¡Error al Registrarse!</div></div>
-                    <div class="row">
+                    
+					<div class="row">
+						<div class="btn-group">
+							<div class="form-group">
+								<a href="{% url 'usuario:registrar_rostro' %}" class="btn btn-dark">Registrar Rostro</a>
+						</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
 						<div class="col-md-10 col-md-offset-2">
 							<div class="form-group">
 								<button class="btn btn-primary btn-xl" id="submitButton" type="submit">Guardar</button>
@@ -88,7 +100,7 @@ Registro-Refugio de animales
 										<a class="dropdown-item" href="{% url 'logout' %}"> Salir</a>
 									</div>
                         		{% else %}
-									<li><a href="{% url 'usuario:registrar' %}"></a>Error al registrarse</li>
+									<a href="{% url 'usuario:registrar' %}"></a>
 								{% endif %}
 							<br>
 						</div>
