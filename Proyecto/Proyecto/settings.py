@@ -116,16 +116,12 @@ USE_TZ = True
 
 #AUTH_USER_MODEL = 'apps.usuario.User'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -142,10 +138,8 @@ EMAIL_HOST_USER = 'refugiodeanimalesproyecto@gmail.com'
 EMAIL_HOST_PASSWORD = 'refugiomarcos'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-#LOGIN_URL = 'login'
-#LOGOUT_URL = 'logout'
 
-
+#Captcha
 RECAPTCHA_PUBLIC_KEY = '6LcGwYcfAAAAAL5RKPupSbbTxCJC2-ERwpeMtkG7'
 RECAPTCHA_PRIVATE_KEY = '6LcGwYcfAAAAABSvVSPLKA3BT06SZEGDFFr_FU5x'
 NOCAPTCHA= True
