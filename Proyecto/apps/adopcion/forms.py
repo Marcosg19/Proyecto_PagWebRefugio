@@ -1,6 +1,38 @@
 from django import forms
 from apps.adopcion.models import Persona, Solicitud
 
+
+
+from django import forms
+from .models import Adoption
+from django.forms import ModelForm
+
+
+
+class adoptionForm(ModelForm):
+    class Meta:
+        model = Adoption
+        fields = ('user','firstName','lastName','email','phone','age','addreses','Pet','reason','otherPets')
+        
+        widgets = {
+            'user': forms.TextInput(attrs={'class': 'form-control', 'readonly ': ''}),
+            'firstName': forms.TextInput(attrs={'class': 'form-control' }),
+            'lastName': forms.TextInput(attrs={'class': 'form-control' }),
+            'email': forms.EmailInput(attrs={'class': 'form-control' }),
+            'phone': forms.NumberInput(attrs={'class': 'form-control' }),
+            'age': forms.NumberInput(attrs={'class': 'form-control' }),
+            'addreses': forms.TextInput(attrs={'class': 'form-control' }),
+            'Pet': forms.Select(attrs={'class': 'form-control' }),
+            'reason': forms.Textarea(attrs={'class': 'form-control','rows':'3' }),
+            'otherPets': forms.Textarea(attrs={'class': 'form-control','rows':'3' }),
+
+        }
+
+
+
+
+
+
 class PersonaForm(forms.ModelForm):
 
     class Meta:

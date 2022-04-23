@@ -1,0 +1,83 @@
+
+{% extends 'base.html'%}
+{% block content%}
+<style>
+    .img {
+        object-fit: cover;
+        height: 250px;
+    }
+</style>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h1>Solicitudes de Adopción</h1>    
+    {{attr}}
+    <div class="table-responsive">
+    <table class="table table-hover table-sm table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Nombre completo</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Razón</th>
+                <th scope="col">Otras Mascotas</th>
+                <th scope="col">Mascota</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            {% for adoption in  adoption_list%}
+            
+            
+            
+            <tr>
+                <th scope="row">{{adoption.id}}</th>
+                <td>{{adoption.user}}</td>
+                <td>{{adoption.firstName}} {{adoption.lastName}}</td>
+                <td>{{adoption.email}}</td>
+                <td>{{adoption.phone}}</td>
+                <td>{{adoption.addreses}}</td>
+                <td>{{adoption.reason}}</td>
+                <td>{{adoption.otherPets}}</td>
+                <td>{{adoption.Pet}}</td>
+
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                    <a  class="btn btn-sm btn-secondary"  href= "{% url 'adopcion:updateAdoption' adoption.id %}">Editar</a>
+                    <a  class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{adoption.id}}">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{adoption.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{adoption.id}}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ¿Está seguro que quiere eliminar este elemeto?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <a  href= "{% url 'adopcion:deleteAdoption' adoption.id %}" class="btn btn-danger" >Eliminar</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+        
+{% endblock %}

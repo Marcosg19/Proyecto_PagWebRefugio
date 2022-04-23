@@ -1,16 +1,30 @@
-{% extends 'base/base.html'%}
+
+{% extends 'base.html'%}
 {% block content%}
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<div class="shadow p-3 mb-5 bg-body rounded">
-    <h1>Escribe para volver a intentarlo</h1>
+
+<div class="shadow p-3 mb-5 bg-body rounded center-form text-center">
+    <h2>Demasiados intentos incorrectos</h2>
+    <br>
+    <h5>Resuelve este Captcha para volver a intentarlo</h5>
     <form action="" method="POST" enctype="multipart/form-data">
+        <br>
        
         {% csrf_token %}
         
         {{form.captcha }}
     </br>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <button type="submit" class="btn btn-primary">Siguiente</button>
     </form>
 </div>
 {% endblock %}

@@ -5,10 +5,72 @@ from django.core import serializers
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from apps.mascota.forms import MascotaForm
-from apps.mascota.models import Mascota
+#from apps.mascota.forms import MascotaForm
+#from apps.mascota.models import Mascota
+
+
+
+
+from django.shortcuts import render, redirect
+
+from django.contrib import messages
+
+
+
+
+
+from django.http import HttpResponse
+
+from .models import Pets
+
+from .forms import addPetForm
+
 
 # Views
+
+def viewPet(request):
+    pet_list = Pets.objects.all()
+    return render(request, 'viewpet.html', {'pet_list':pet_list})
+
+
+def addPet(request):    
+    if request.method == "POST":
+        form = addPetForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Mascota ingresada")
+            return redirect('/addPet')
+    else:
+        form = addPetForm()
+    return render(request, 'addpet.html', {'form':form})
+
+def updatePet(request, pet_id):
+    pet = Pets.objects.get(pk=pet_id)
+    form = addPetForm(request.POST or None, request.FILES or None, instance=pet)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Información actualizada")
+        return redirect('/viewPet')
+    
+    return render(request, 'updatepet.html', {'pet':pet, 'form':form})
+
+
+def deletePet(request, pet_id):
+    pet = Pets.objects.get(pk=pet_id)
+    pet.delete()
+    
+    return redirect('/viewPet')
+
+
+
+
+
+
+
+
+
+
+'''
 
 def listado(request):
 	lista = serializers.serialize('json', User.objects.all(), fields=['username', 'first_name'])
@@ -80,7 +142,7 @@ class MascotaDelete(DeleteView):
 	model = Mascota
 	template_name = 'mascota/mascota_delete.html'
 	success_url = reverse_lazy('mascota:mascota_listar')
-
+'''
 
 '''
 def listado(request):

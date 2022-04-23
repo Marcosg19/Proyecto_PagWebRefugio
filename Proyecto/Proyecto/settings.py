@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'Proyecto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'proyectoPAIE',
+        'NAME': 'prueba2',
         'USER': 'postgres',
         'PASSWORD': 'marcos2001',
         'HOST': 'localhost',
@@ -100,6 +100,19 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+
+    {
+        'NAME': 'Proyecto.customPassword.NumberValidator', 
+        },
+    {
+        'NAME': 'Proyecto.customPassword.UppercaseValidator', 
+        },
+    {
+        'NAME': 'Proyecto.customPassword.LowercaseValidator', 
+        },
+    {
+        'NAME': 'Proyecto.customPassword.SymbolValidator', 
+        },
 ]
 
 # Internationalization
@@ -114,12 +127,12 @@ USE_L10N = True
 USE_TZ = True
 
 
-#AUTH_USER_MODEL = 'apps.usuario.User'
+AUTH_USER_MODEL = 'usuario.User'
 
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
@@ -129,6 +142,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
+
+APPEND_SLASH = False
 
 
 EMAIL_USE_TLS = True

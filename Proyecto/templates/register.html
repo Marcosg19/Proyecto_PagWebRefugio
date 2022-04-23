@@ -1,0 +1,28 @@
+
+{% extends 'base.html'%}
+{% block content%}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="shadow p-3 mb-5 bg-body rounded center-form">
+    <h1>REGISTRARSE</h1>
+    <form action="{% url 'usuario:register' %}" method="POST" enctype="multipart/form-data">
+       
+        {% csrf_token %}
+        
+        {{form.as_p }}
+
+
+      <div class="alert alert-primary" role="alert">
+        <strong>NOTA:</strong> Al hacer click en REGISTRARSE se iniciará el registro de reconocimiento facial, para acceder a tu cuenta.
+      </div>
+        <button type="submit" class="btn btn-primary form-control">REGISTRARSE</button>
+    </form>
+</div>
+<br>
+{% endblock %}

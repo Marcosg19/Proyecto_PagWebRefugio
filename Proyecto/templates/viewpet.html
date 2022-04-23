@@ -1,0 +1,108 @@
+
+{% extends 'base.html'%}
+{% block content%}
+<style>
+    .img {
+      object-fit: cover;
+      height: 250px;
+      }
+  </style>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <div class="row row-cols-1 row-cols-md-4 g-3">
+
+
+    {% for pet in  pet_list%}
+
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="{{pet.image.url}}" class="card-img-top img-fluid img"   alt="...">
+                
+            {% if user.is_authenticated and user.is_staff %}
+
+            <div class="card-header">Adoptante: {{pet.adopter}} </div>
+            {% else %}
+            {% endif %}
+
+                <div class="card-body">
+              <h5 class="card-title">{{pet.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{pet.species}} - {{pet.breed}} - {{pet.age}} Años - {{pet.sex}}</h6>
+              <p class="card-text">   {{pet.description}}    </p>
+            </div>  
+
+            
+              <div class="accordion accordion-flush" id="accordionFlushExample{{pet.id}}">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne{{pet.id}}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{pet.id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                      Ver más información...
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne{{pet.id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne{{pet.id}}" data-bs-parent="#accordionFlushExample{{pet.id}}">
+                    <div class="accordion-body">        
+                        
+                        <strong>Vacunación:</strong> {{pet.vaccination}}<br>
+                        <strong>Enfermedades:</strong> {{pet.illness}}<br>
+                        <strong>Alimentación:</strong> {{pet.feeding}}<br>
+                        <strong>Fecha de rescate:</strong> {{pet.rescue_date}}<br>
+                    
+                        </div>
+                  </div>
+                </div>
+                </div>
+
+            
+                {% if user.is_authenticated and user.is_staff %}
+                <div class="card-footer">
+                   <div class="btn-group">
+                <a  href= "{% url 'mascota:updatePet' pet.id %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a  class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{pet.id}}">Eliminar</a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{pet.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{pet.id}}" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ¿Está seguro que quiere eliminar este elemeto?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <a  href= "{% url 'mascota:deletePet' pet.id %}" class="btn btn-danger" >Eliminar</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+                
+              </div>
+                  
+                </div>
+                {% else %}
+                {% endif %}
+
+          </div>
+        </div>
+        
+
+
+
+  
+
+        
+        
+        
+        {% endfor %}
+        
+        
+    </div>
+
+
+
+{% endblock %}

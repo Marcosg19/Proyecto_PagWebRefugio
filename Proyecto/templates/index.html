@@ -1,71 +1,390 @@
-{% extends 'base/base.html' %}
 
-{% block title %}
-Iniciar Sesión-Refugio de animales
-{% endblock %}
-{% block navbar%}
-<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-	<div class="container">
-		<a class="navbar-brand" href="{% url 'home' %}">HOME</a>
-		<button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-	</button>
-	</div>
-</nav>
-{% endblock %}
-{% block content %}
-<br>
-<br>
-<section class="page-section" id="login">
-	<div class="container">
-		<!-- Contact Section Heading-->
-		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Iniciar sesión - Login</h2>
-		<!-- Icon Divider-->
-		<div class="divider-custom">
-			<div class="divider-custom-line"></div>
-			<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-			<div class="divider-custom-line"></div>
-		</div>
-		<!-- Contact Section Form-->
-		<div class="row justify-content-center">
-			<div class="col-lg-8 col-xl-7">
-				<form method="post">
-					{% csrf_token %}
-					<div class="form-floating mb-3">
-						<input class="form-control" name="username" type="text" placeholder="Nombre" data-sb-validations="required" />
-						<label for="username">Nombre de usuario</label>
-						<div class="invalid-feedback" data-sb-feedback="username:required">Se requiere un nombre.</div>
-					</div>
-
-					<div class="form-floating mb-2">
-						<input class="form-control" name="password" type="password" placeholder="Password" data-sb-validations="required,password" />
-						<label for="username">Contraseña</label>
-						<div class="invalid-feedback" data-sb-feedback="password:required">Se requiere una contraseña.</div>
-						<div class="invalid-feedback" data-sb-feedback="password:password">La contraseña no es válido.</div>
-					</div>
-
-					<div class="mb-3" >
-						<div class="g-recaptcha" data-sitekey="6LcGwYcfAAAAAL5RKPupSbbTxCJC2-ERwpeMtkG7">
-					</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3">
-							<div class="form-group">
-								<a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
-								<br>
-								<br>
-								<input class="btn btn-primary btn-xl" type="submit" value="Ingresar">
-								{% if password.is_incorrect %}
+{% extends 'base.html'%}
+{% block content%}
 
 
-								{% endif %}
+<style>
+  .img {
+    object-fit: cover;
+    width: 300px;
+    height: 300px;
+	}
 
-						</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+
+</style>
+    <div class="img-back">
+
+</div>
+
+
+{% if user.is_authenticated %}
+<header class="masthead bg-primary text-white text-center">
+  <div class="container d-flex align-items-center flex-column">
+    <div class="text-center">
+
+      <h1>Refugio de Mascotas</h1>
+      <h2>Bienvenido  {{ user.get_full_name }}</h2>
+
+      {% if user.image %}
+      <img src= "{{user.image.url}}" class="img" > 
+
+      {% else %}
+
+      <img src= "static/assets/anonimo.png" />
+
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<!-- Portfolio Section-->
+<section class="page-section mascotas" id="mascotas">
+  <div class="container">
+      <!-- Portfolio Section Heading-->
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Mascotas</h2>
+      <!-- Icon Divider-->
+      <div class="divider-custom">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+      </div>
+      <!-- Portfolio Grid Items-->
+      <div class="row justify-content-center">
+          <!-- Portfolio Item 1-->
+          <div class="col-md-6 col-lg-4 mb-5">
+              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                  </div>
+                  <img class="img-fluid" src="static/assets/img/portfolio/mascota1.jpg" alt="..." />
+              </div>
+          </div>
+          <!-- Portfolio Item 2-->
+          <div class="col-md-6 col-lg-4 mb-5">
+              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                  </div>
+                  <img class="img-fluid" src="static/assets/img/portfolio/mascota2.jpg" alt="..." />
+              </div>
+          </div>
+          <!-- Portfolio Item 3-->
+          <div class="col-md-6 col-lg-4 mb-5">
+              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                  </div>
+                  <img class="img-fluid" src="static/assets/img/portfolio/mascota3.jpg" alt="..." />
+              </div>
+          </div>
+          <!-- Portfolio Item 4-->
+
+          <!-- Portfolio Item 5-->
+
+          <!-- Portfolio Item 6-->
+
+      </div>
+  </div>
 </section>
+
+
+<!-- About Section-->
+<section class="page-section bg-primary text-white mb-0" id="about">
+  <div class="container">
+      <!-- About Section Heading-->
+      <h2 class="page-section-heading text-center text-uppercase text-white">Acerca de</h2>
+      <!-- Icon Divider-->
+      <div class="divider-custom divider-light">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+      </div>
+      <!-- About Section Content-->
+      <div class="row">
+          <div class="col-lg-4 ms-auto"><p class="lead">Este es un sitio web sobre un refugio de animales</p></div>
+          <div class="col-lg-4 me-auto"><p class="lead">José Marcos González Castellanos</p></div>
+      </div>
+  </div>
+</section>
+<!-- Contact Section-->
+<section class="page-section" id="contact">
+  <div class="container">
+      <!-- Contact Section Heading-->
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contactame</h2>
+      <!-- Icon Divider-->
+      <div class="divider-custom">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+      </div>
+      <!-- Contact Section Form-->
+      <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-7">
+              <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                  <!-- Name input-->
+                  <div class="form-floating mb-3">
+                      <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                      <label for="name">Nombre</label>
+                      <div class="invalid-feedback" data-sb-feedback="name:required">Se requiere un nombre.</div>
+                  </div>
+                  <!-- Email address input-->
+                  <div class="form-floating mb-3">
+                      <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                      <label for="email">Correo electrónico</label>
+                      <div class="invalid-feedback" data-sb-feedback="email:required">Se requiere un email.</div>
+                      <div class="invalid-feedback" data-sb-feedback="email:email">El correo no es válido.</div>
+                  </div>
+                  <!-- Phone number input-->
+                  <div class="form-floating mb-3">
+                      <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                      <label for="phone">Número de teléfono</label>
+                      <div class="invalid-feedback" data-sb-feedback="phone:required">Se requiere un número de teléfono.</div>
+                  </div>
+                  <!-- Message input-->
+                  <div class="form-floating mb-3">
+                      <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                      <label for="message">Mensaje</label>
+                      <div class="invalid-feedback" data-sb-feedback="message:required">Se requiere un mensaje.</div>
+                  </div>
+                  <!-- Submit success message-->
+                  <!---->
+                  <!-- This is what your users will see when the form-->
+                  <!-- has successfully submitted-->
+                  <div class="d-none" id="submitSuccessMessage">
+                      <div class="text-center mb-3">
+                          <div class="fw-bolder">Envío de formulario exitoso!</div>
+                          <br />
+                          <a href="https://startbootstrap.com/solution/contact-forms"></a>
+                      </div>
+                  </div>
+                  <!-- Submit error message-->
+                  <!---->
+                  <!-- This is what your users will see when there is-->
+                  <!-- an error submitting the form-->
+                  <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">¡Error al enviar el mensaje!</div></div>
+                  <!-- Submit Button-->
+                  <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Enviar</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Footer-->
+<footer class="footer text-center">
+  <div class="container">
+      <div class="row">
+          <!-- Footer Location-->
+          <div class="col-lg-4 mb-5 mb-lg-0">
+              <h4 class="text-uppercase mb-4">LOCALIZACIÓN</h4>
+              <p class="lead mb-0">
+                  Universidad de San Carlos de Guatemala
+                  <br />
+                  Facultad de Ingenieria 
+              </p>
+          </div>
+          <!-- Footer Social Icons-->
+          <div class="col-lg-4 mb-5 mb-lg-0">
+              <h4 class="text-uppercase mb-4">Redes Sociales</h4>
+              <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/usacenlinea"><i class="fab fa-fw fa-facebook-f"></i></a>
+              <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/usacenlinea"><i class="fab fa-fw fa-twitter"></i></a>
+              <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/usacenlinea/?hl=es"><i class="fab fa-fw fa-instagram"></i></a>
+          </div>
+          <!-- Footer About Text-->
+          <div class="col-lg-4">
+              <h4 class="text-uppercase mb-4">Autores</h4>
+              <p class="lead mb-0">
+                  Marcos González
+                  <br />
+                  Hector Garcia
+                  <a href="http://startbootstrap.com"> </a>
+              </p>
+          </div>
+      </div>
+  </div>
+</footer>
+
+{% else %}
+<header class="masthead bg-primary text-white text-center">
+  <div class="container d-flex align-items-center flex-column">
+      <!-- Masthead Avatar Image-->
+      <img class="masthead-avatar mb-5" src="static/assets/icon.png" alt="..." />
+      <!-- Masthead Heading-->
+      <h1 class="masthead-heading text-uppercase mb-0"> Bienvenido a Refugio de Mascotas</h1>
+      <!-- Icon Divider-->
+      <div class="divider-custom divider-light">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+      </div>
+      <!-- Masthead Subheading-->
+      <p class="masthead-subheading font-weight-light mb-0">Proyectos aplicados a IE</p>
+  </div>
+</header>
+<!-- Portfolio Section-->
+<section class="page-section mascotas" id="mascotas">
+  <div class="container">
+      <!-- Portfolio Section Heading-->
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Mascotas</h2>
+      <!-- Icon Divider-->
+      <div class="divider-custom">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+      </div>
+      <!-- Portfolio Grid Items-->
+      <div class="row justify-content-center">
+          <!-- Portfolio Item 1-->
+          <div class="col-md-6 col-lg-4 mb-5">
+              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                  </div>
+                  <img class="img-fluid" src="static/assets/img/portfolio/mascota1.jpg" alt="..." />
+              </div>
+          </div>
+          <!-- Portfolio Item 2-->
+          <div class="col-md-6 col-lg-4 mb-5">
+              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                  </div>
+                  <img class="img-fluid" src="static/assets/img/portfolio/mascota2.jpg" alt="..." />
+              </div>
+          </div>
+          <!-- Portfolio Item 3-->
+          <div class="col-md-6 col-lg-4 mb-5">
+              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                  </div>
+                  <img class="img-fluid" src="static/assets/img/portfolio/mascota3.jpg" alt="..." />
+              </div>
+          </div>
+          <!-- Portfolio Item 4-->
+
+          <!-- Portfolio Item 5-->
+
+          <!-- Portfolio Item 6-->
+
+      </div>
+  </div>
+</section>
+
+
+<!-- About Section-->
+<section class="page-section bg-primary text-white mb-0" id="about">
+  <div class="container">
+      <!-- About Section Heading-->
+      <h2 class="page-section-heading text-center text-uppercase text-white">Acerca de</h2>
+      <!-- Icon Divider-->
+      <div class="divider-custom divider-light">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+      </div>
+      <!-- About Section Content-->
+      <div class="row">
+          <div class="col-lg-4 ms-auto"><p class="lead">Este es un sitio web sobre un refugio de animales</p></div>
+          <div class="col-lg-4 me-auto"><p class="lead">José Marcos González Castellanos</p></div>
+      </div>
+  </div>
+</section>
+<!-- Contact Section-->
+<section class="page-section" id="contact">
+  <div class="container">
+      <!-- Contact Section Heading-->
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contactame</h2>
+      <!-- Icon Divider-->
+      <div class="divider-custom">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+      </div>
+      <!-- Contact Section Form-->
+      <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-7">
+              <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                  <!-- Name input-->
+                  <div class="form-floating mb-3">
+                      <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                      <label for="name">Nombre</label>
+                      <div class="invalid-feedback" data-sb-feedback="name:required">Se requiere un nombre.</div>
+                  </div>
+                  <!-- Email address input-->
+                  <div class="form-floating mb-3">
+                      <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                      <label for="email">Correo electrónico</label>
+                      <div class="invalid-feedback" data-sb-feedback="email:required">Se requiere un email.</div>
+                      <div class="invalid-feedback" data-sb-feedback="email:email">El correo no es válido.</div>
+                  </div>
+                  <!-- Phone number input-->
+                  <div class="form-floating mb-3">
+                      <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                      <label for="phone">Número de teléfono</label>
+                      <div class="invalid-feedback" data-sb-feedback="phone:required">Se requiere un número de teléfono.</div>
+                  </div>
+                  <!-- Message input-->
+                  <div class="form-floating mb-3">
+                      <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                      <label for="message">Mensaje</label>
+                      <div class="invalid-feedback" data-sb-feedback="message:required">Se requiere un mensaje.</div>
+                  </div>
+                  <!-- Submit success message-->
+                  <!---->
+                  <!-- This is what your users will see when the form-->
+                  <!-- has successfully submitted-->
+                  <div class="d-none" id="submitSuccessMessage">
+                      <div class="text-center mb-3">
+                          <div class="fw-bolder">Envío de formulario exitoso!</div>
+                          <br />
+                          <a href="https://startbootstrap.com/solution/contact-forms"></a>
+                      </div>
+                  </div>
+                  <!-- Submit error message-->
+                  <!---->
+                  <!-- This is what your users will see when there is-->
+                  <!-- an error submitting the form-->
+                  <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">¡Error al enviar el mensaje!</div></div>
+                  <!-- Submit Button-->
+                  <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Enviar</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- Footer-->
+<footer class="footer text-center">
+  <div class="container">
+      <div class="row">
+          <!-- Footer Location-->
+          <div class="col-lg-4 mb-5 mb-lg-0">
+              <h4 class="text-uppercase mb-4">LOCALIZACIÓN</h4>
+              <p class="lead mb-0">
+                  Universidad de San Carlos de Guatemala
+                  <br />
+                  Facultad de Ingenieria 
+              </p>
+          </div>
+          <!-- Footer Social Icons-->
+          <div class="col-lg-4 mb-5 mb-lg-0">
+              <h4 class="text-uppercase mb-4">Redes Sociales</h4>
+              <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/usacenlinea"><i class="fab fa-fw fa-facebook-f"></i></a>
+              <a class="btn btn-outline-light btn-social mx-1" href="https://twitter.com/usacenlinea"><i class="fab fa-fw fa-twitter"></i></a>
+              <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/usacenlinea/?hl=es"><i class="fab fa-fw fa-instagram"></i></a>
+          </div>
+          <!-- Footer About Text-->
+          <div class="col-lg-4">
+              <h4 class="text-uppercase mb-4">Autores</h4>
+              <p class="lead mb-0">
+                  Marcos González
+                  <br />
+                  Hector Garcia
+                  <a href="http://startbootstrap.com"> </a>
+              </p>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endif %}
+
 {% endblock %}

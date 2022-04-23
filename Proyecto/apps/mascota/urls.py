@@ -1,19 +1,30 @@
 from django.urls import path, re_path
 from django.contrib.auth.decorators import login_required
 
-from apps.mascota.views import index, mascota_view, mascota_list, mascota_edit, mascota_delete, MascotaList, MascotaCreate, MascotaUpdate, MascotaDelete, listado
+#from apps.mascota.views import index, mascota_view, mascota_list, mascota_edit, mascota_delete, MascotaList, MascotaCreate, MascotaUpdate, MascotaDelete, listado
+
+
+
+from unicodedata import name
+from urllib.parse import urlparse
+from django.urls import path
+from . import views 
+from django.contrib.auth import views as authViews
+
+
+
 
 app_name = 'mascota'
 
 
 urlpatterns = [
-    re_path(r'^$', index, name='index'),
-    re_path(r'^nuevo$', login_required(MascotaCreate.as_view()), name='mascota_crear'),
-    
-    re_path(r'^listar', login_required(MascotaList.as_view()), name='mascota_listar'),
-    re_path(r'^editar/(?P<pk>\d+)/$', login_required(MascotaUpdate.as_view()), name='mascota_editar'),
-    re_path(r'^eliminar/(?P<pk>\d+)/$', login_required(MascotaDelete.as_view()), name='mascota_eliminar'),
-    re_path(r'^listado', listado, name="listado"),
+
+
+
+    path('updatePet/<pet_id>', views.updatePet, name='updatePet'),
+    path('deletePet/<pet_id>', views.deletePet, name='deletePet'),
+    path('addPet', views.addPet, name='addPet'),
+    path('viewPet', views.viewPet, name='viewPet'),
 
 ]
 

@@ -1,0 +1,50 @@
+
+{% extends 'base.html'%}
+{% block content%}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="shadow p-3 mb-5 bg-body rounded center-form">
+    <h1>Solicitud de Adopción</h1>
+    {% if not user.is_authenticated %}
+    <div class="alert alert-primary" role="alert">
+      <strong>Aviso!</strong> Para enviar una solicitud de adopción necesitas tener una cuenta
+    </div>
+    {% else %}
+
+    {% endif %}
+    {% if submitted %} 
+    
+    <div class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+          Tu solicitud ha sido enviada
+        </div>
+      </div>
+    
+    {% else %} 
+
+
+    <form action="{% url 'adopcion:adoptionRequest' %}" method="POST" enctype="multipart/form-data">
+       
+        {% csrf_token %}
+        
+        {{form.as_p }}
+
+        
+    </br>
+    {% if user.is_authenticated %}
+    <button type="submit" class="btn btn-primary form-control">Enviar</button>
+    {% else %}
+    {% endif %}
+
+    </form>
+</div>
+
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+
+{% extends 'base.html'%}
+{% block content%}
+
+
+<div class="shadow p-3 mb-5 bg-body rounded center-form">
+    <h1>Editar Solicitud de adopcion</h1>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+       
+        {% csrf_token %}
+        
+        {{form.as_p }}
+    </br>
+        <button type="submit" class="btn btn-primary form-control">Submit</button>
+    </form>
+</div>
+
+
+{% endblock %}

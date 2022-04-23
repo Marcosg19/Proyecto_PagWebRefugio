@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'usuario:login' %}">Iniciar Sesión</a></li>
+    <li class="breadcrumb-item active" aria-current="{% url 'usuario:verify' %}">Verificación de Rostro</li>
+  </ol>
+</nav>
+
+<br>
+<br>
+<div class="shadow p-3 mb-5 bg-body rounded center-form text-center">
+    <h1>Verificacion de rostro</h1>
+    <p>Dar click en Iniciar</p>
+    <p>Asegurate de observar a la camara.</p>
+    <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="50" style="width: 100%">
+      </div>
+    </div>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+       
+        {% csrf_token %}
+        
+        {{form.as_p }}
+    </br>
+        <button type="submit" class="btn btn-primary">Iniciar</button>
+    </form>
+</div>
+{% endblock %}

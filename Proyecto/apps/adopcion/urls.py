@@ -3,14 +3,32 @@ from django.contrib.auth.decorators import login_required
 
 from apps.adopcion.views import index_adopcion, SolicitudList, SolicitudCreate, SolicitudUpdate, SolicitudDelete
 
+
+
+
+from unicodedata import name
+from urllib.parse import urlparse
+from django.urls import path
+from . import views 
+from django.contrib.auth import views as authViews
+
+
+
+
 app_name = 'adopcion'
 
 urlpatterns = [
-    re_path(r'^index$', index_adopcion),
-    re_path(r'^solicitud/listar$', login_required(SolicitudList.as_view()), name='solicitud_listar'),
-    re_path(r'^solicitud/nueva$', login_required(SolicitudCreate.as_view()), name='solicitud_crear'),
-    re_path(r'^solicitud/editar/(?P<pk>\d+)$', login_required(SolicitudUpdate.as_view()), name='solicitud_editar'),
-    re_path(r'^solicitud/eliminar/(?P<pk>\d+)$', login_required(SolicitudDelete.as_view()), name='solicitud_eliminar'),
+
+
+
+    path('adoptionRequest', views.adoptionRequest, name='adoptionRequest'),
+    path('viewAdoption', views.viewAdoption, name='viewAdoption'),
+    path('deleteAdoption/<Adoption_id>', views.deleteAdoption, name='deleteAdoption'),
+    path('updateAdoption/<Adoption_id>', views.updateAdoption, name='updateAdoption'),
+
+
+
+
     #path('index/', login_required(index_adopcion)),
     #path('solicitud/listar', login_required(SolicitudList.as_view()), name='solicitud_listar'),
     #path('solicitud/nueva', login_required(SolicitudCreate.as_view()), name='solicitud_crear'),

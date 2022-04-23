@@ -7,6 +7,69 @@ from apps.adopcion.models import Persona, Solicitud
 from apps.adopcion.forms import PersonaForm, SolicitudForm
 
 
+
+
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+
+
+
+from django.http import HttpResponse
+
+from .models import Adoption
+
+from .forms import adoptionForm
+
+
+
+
+def adoptionRequest(request):
+    submitted = False
+    if request.method == "POST":
+        form = adoptionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('adoptionRequest?submitted=True')
+    else:
+        form = adoptionForm(initial={'user': request.user})
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'adoptionrequest.html', {'form':form, 'submitted':submitted})    
+
+def viewAdoption(request):
+    adoption_list = Adoption.objects.all()
+
+    return render(request, 'viewAdoption.html', {'adoption_list':adoption_list})
+
+
+def deleteAdoption(request, Adoption_id):
+    adoption = Adoption.objects.get(pk=Adoption_id)
+    adoption.delete()
+    return redirect('/viewAdoption')
+
+def updateAdoption(request, Adoption_id):
+    adoption = Adoption.objects.get(pk=Adoption_id)
+    form = adoptionForm(request.POST or None, instance=adoption)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Información actualizada")
+        return redirect('/viewAdoption')
+    
+    return render(request, 'updateAdoption.html', {'adoption':adoption, 'form':form})
+
+
+
+
+
+
+
+
+
+
+
+
 def index_adopcion(request):
 	return HttpResponse("soy la pagina principal de la app adopcion")
 

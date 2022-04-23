@@ -1,0 +1,71 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Iniciar Sesión-Refugio de animales
+{% endblock %}
+{% block navbar%}
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand" href="{% url 'home' %}">HOME</a>
+		<button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	</button>
+	</div>
+</nav>
+{% endblock %}
+{% block content %}
+<br>
+<br>
+<section class="page-section" id="login">
+	<div class="container">
+		<!-- Contact Section Heading-->
+		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Iniciar sesión - Login</h2>
+		<!-- Icon Divider-->
+		<div class="divider-custom">
+			<div class="divider-custom-line"></div>
+			<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+			<div class="divider-custom-line"></div>
+		</div>
+		<!-- Contact Section Form-->
+		<div class="row justify-content-center">
+			<div class="col-lg-8 col-xl-7">
+				<form method="post">
+					{% csrf_token %}
+					<div class="form-floating mb-3">
+						<input class="form-control" name="username" type="text" placeholder="Nombre" data-sb-validations="required" />
+						<label for="username">Nombre de usuario</label>
+						<div class="invalid-feedback" data-sb-feedback="username:required">Se requiere un nombre.</div>
+					</div>
+
+					<div class="form-floating mb-2">
+						<input class="form-control" name="password" type="password" placeholder="Password" data-sb-validations="required,password" />
+						<label for="username">Contraseña</label>
+						<div class="invalid-feedback" data-sb-feedback="password:required">Se requiere una contraseña.</div>
+						<div class="invalid-feedback" data-sb-feedback="password:password">La contraseña no es válido.</div>
+					</div>
+
+					<div class="mb-3" >
+						<div class="g-recaptcha" data-sitekey="6LcGwYcfAAAAAL5RKPupSbbTxCJC2-ERwpeMtkG7">
+					</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="form-group">
+								<a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
+								<br>
+								<br>
+								<input class="btn btn-primary btn-xl" type="submit" value="Ingresar">
+								{% if password.is_incorrect %}
+
+
+								{% endif %}
+
+						</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
