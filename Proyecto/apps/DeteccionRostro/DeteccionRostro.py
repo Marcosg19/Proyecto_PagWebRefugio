@@ -7,7 +7,7 @@ from matplotlib import image
 def CAPTURANDO(name):
     
     personName = name
-    dataPath = 'apps/DeteccionRostro/datos/' #rutas 
+    dataPath = 'media/datos/' #rutas 
     personPath = dataPath + '/' + personName
 
     if not os.path.exists(personPath):
@@ -46,7 +46,7 @@ def CAPTURANDO(name):
     cv2.destroyAllWindows()
 
 def ENTRENANDO(name):
-    dataPath = 'apps/DeteccionRostro/datos/' + name
+    dataPath = 'media/datos/' + name
     peopleList = os.listdir(dataPath)
     print('Lista de personas: ', peopleList)
 
@@ -88,7 +88,7 @@ def ENTRENANDO(name):
 
 
 def RECONOCIENDO():
-    dataPath = 'apps/DeteccionRostro/datos/' 
+    dataPath = 'media/datos/' 
     imagePaths = os.listdir(dataPath)
     print('imagePaths=',imagePaths)
 

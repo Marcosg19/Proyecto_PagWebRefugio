@@ -4,7 +4,7 @@ from django.urls import path, re_path
 #from apps.usuario.views import RegistroUsuario, UserAPI, RegistroRostro
 from . import views
 
-
+from .views import ListaClientesPDF
 from django.urls import path
 from . import views 
 #from django.contrib.auth import views as authViews
@@ -26,6 +26,7 @@ urlpatterns = [
     path('viewClient', views.viewClient, name='viewClient'),
     path('deleteClient/<Client_id>', views.deleteClient, name='deleteClient'),
     path('updateProfile/<Profile_id>', views.updateProfile, name='updateProfile'),
+    path('listarclientes-pdf/', ListaClientesPDF.as_view(), name = "clientes_listar_pdf"),
 
        #? passsword reset email
     
@@ -33,6 +34,7 @@ urlpatterns = [
     
     
     path('captcha', views.captcha,name='captcha'),
+    path('contacto', views.contact, name='contact')
 ]
 
     #path('registrar/', RegistroUsuario.as_view(), name='usuario_registrar'),

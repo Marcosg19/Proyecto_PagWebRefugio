@@ -11,7 +11,12 @@
 <br>
 <br>
 <br>
-<h1>Clientes</h1>    
+<h1 align="center">Clientes</h1>
+<div style="text-align: right;">
+  {% if user.is_authenticated and user.is_staff %}
+  <a class="btn btn-sm btn-outline-dark" href="{% url 'usuario:clientes_listar_pdf'%}">Generar PDF</a>
+  {% endif %}
+</div>
     <div class="table-responsive">
     <table class="table table-hover table-sm table-responsive">
         <thead>
@@ -59,7 +64,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      ¿Está seguro que quiere eliminar este elemeto?
+                      ¿Está seguro que quiere eliminar este elemento?
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

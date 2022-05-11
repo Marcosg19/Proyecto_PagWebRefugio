@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div style="text-align: center;">
+    <h1>Listado de Vacunas</h1>
+</div>
+
+    
+<div style="text-align: right;">
+	<a class="btn btn-sm btn-outline-dark" href="{% url 'mascota:viewPet'%}">Listado de Mascotas</a>
+	<a class="btn btn-sm btn-outline-dark" href="{% url 'mascota:vacuna_listar_pdf'%}">Generar PDF</a>
+</div>
+
+
+	
+</p>
+<style type="text/css"> 
+	.transformacion1 { text-transform: capitalize;}   
+	.transformacion2 { text-transform: uppercase;}   
+	.transformacion3 { text-transform: lowercase;}   
+	</style> 
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td># de ID</td>
+			<td>Nombre de la Vacuna</td>
+			{% if user.is_authenticated %}
+			<td>Acciones</td>
+			{%endif %}
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for vacuna in object_list%}
+		<tr>
+			<td>{{ vacuna.id }}</td>
+            <td>{{vacuna.nombre}}</td>
+            {% if user.is_authenticated %}
+			<td>
+				<a class="btn btn-dark" href="{% url 'mascota:vacuna_editar' vacuna.id%}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'mascota:vacuna_eliminar' vacuna.id%}">Eliminar</a>
+			</td>
+			{%endif %}	
+		</tr>
+
+
+
+
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de mascotas</h1>
+		{% endif %}
+
+
+
+	</tbody>
+
+
+
+
+
+</table> 
+
+<div style="text-align: center;">
+    
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+       
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+</div>
+
+
+{% endblock%}

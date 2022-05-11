@@ -14,11 +14,18 @@
 <br>
 <br>
 
-<h1>Solicitudes de Adopción</h1>    
+<h1 align="center">Solicitudes de Adopción</h1>    
     {{attr}}
+
+    <div style="text-align: right;">
+      <a class="btn btn-sm btn-outline-dark" href="{% url 'mascota:viewPet'%}">Mascotas</a>
+      <a class="btn btn-sm btn-outline-dark" href="{% url 'adopcion:solicitud_listar_pdf'%}">Generar PDF</a>
+    </div>
+
     <div class="table-responsive">
     <table class="table table-hover table-sm table-responsive">
         <thead>
+          <br>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Usuario</th>
@@ -47,12 +54,12 @@
                 <td>{{adoption.addreses}}</td>
                 <td>{{adoption.reason}}</td>
                 <td>{{adoption.otherPets}}</td>
-                <td>{{adoption.Pet}}</td>
+                <td>{{adoption.Pets}}</td>
 
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                    <a  class="btn btn-sm btn-secondary"  href= "{% url 'adopcion:updateAdoption' adoption.id %}">Editar</a>
-                    <a  class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{adoption.id}}">Eliminar</a>
+                    <a  class="btn btn-sm btn-secondary" href= "{% url 'adopcion:updateAdoption' adoption.id %}">Editar</a>
+                    <a  class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{adoption.id}}">Eliminar</a>
                     </div>
                 </td>
             </tr>

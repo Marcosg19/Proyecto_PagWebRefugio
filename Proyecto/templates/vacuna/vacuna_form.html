@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div style="text-align: center;">
+    <h1>Agregar una nueva vacuna</h1>
+    <br>
+</div>
+
+    <form method="POST" action="" class="mt-2" autocomplete="off" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form}}
+        <br>
+        <button type="submit" class="btn btn-dark">Guardar</button>
+        <a class="btn btn-secondary" href="{% url 'mascota:vacuna_listar' %}">Cancelar</a>
+    </form>
+{% endblock %}

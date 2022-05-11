@@ -3,9 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from captcha.fields import CaptchaField
 from django import forms
 
-
-
-
 from cv2 import CAP_PVAPI_DECIMATION_2OUTOF16, resize
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -76,3 +73,11 @@ class RegistroRForm(UserCreationForm):
 
 class captchaform(forms.Form):
     captcha = CaptchaField()
+
+
+
+class ContactForm(forms.Form):
+    nombre = forms.CharField()
+    email = forms.EmailField()
+    numero = forms.IntegerField()
+    mensaje = forms.CharField(max_length=200,)

@@ -9,8 +9,6 @@ from django.db import models
 # Create your models here.
 
 
-
-
 class Adoption(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
     user = models.CharField('Usuario', max_length=150)
@@ -20,19 +18,14 @@ class Adoption(models.Model):
     
     phone = models.IntegerField('Número de Telefono')
     age = models.IntegerField('Edad')
-    addreses = models.CharField('Direccón', max_length=150)
+    addreses = models.CharField('Dirección', max_length=150)
     Pet = models.OneToOneField("mascota.Pets", verbose_name='Mascota' ,blank=False, null=False, on_delete=models.CASCADE)
     reason = models.CharField('Motivo para adoptar', max_length=150)
-    otherPets = models.CharField('Otras Mascotas', max_length=150,blank=True)
+    otherPets = models.IntegerField('Otras Mascotas',blank=True)
+    history = HistoricalRecords()
     
     def __str__(self):
         return self.user
-
-
-
-
-
-
 
 
 
@@ -45,8 +38,6 @@ class Persona(models.Model):
     domicilio = models.TextField()
     history = HistoricalRecords()
 
-    def __str__(self):
-        return '{}'.format(self.nombre+" "+self.apellidos)
     
 class Solicitud(models.Model):
     persona = models.ForeignKey(Persona, null=True, blank=True,on_delete=models.CASCADE)

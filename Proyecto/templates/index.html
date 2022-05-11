@@ -1,4 +1,3 @@
-
 {% extends 'base.html'%}
 {% block content%}
 
@@ -18,13 +17,19 @@
 
 
 {% if user.is_authenticated %}
-<header class="masthead bg-primary text-white text-center">
+<header class="masthead bg-dark text-white text-center rounded>
   <div class="container d-flex align-items-center flex-column">
     <div class="text-center">
 
       <h1>Refugio de Mascotas</h1>
-      <h2>Bienvenido  {{ user.get_full_name }}</h2>
-
+      <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+        </div>
+      <h2>Bienvenido/a  {{ user.get_full_name }}</h2>
+        <br>
+        <br>
       {% if user.image %}
       <img src= "{{user.image.url}}" class="img" > 
 
@@ -36,57 +41,6 @@
     </div>
   </div>
 </header>
-
-<!-- Portfolio Section-->
-<section class="page-section mascotas" id="mascotas">
-  <div class="container">
-      <!-- Portfolio Section Heading-->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Mascotas</h2>
-      <!-- Icon Divider-->
-      <div class="divider-custom">
-          <div class="divider-custom-line"></div>
-          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-          <div class="divider-custom-line"></div>
-      </div>
-      <!-- Portfolio Grid Items-->
-      <div class="row justify-content-center">
-          <!-- Portfolio Item 1-->
-          <div class="col-md-6 col-lg-4 mb-5">
-              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                  </div>
-                  <img class="img-fluid" src="static/assets/img/portfolio/mascota1.jpg" alt="..." />
-              </div>
-          </div>
-          <!-- Portfolio Item 2-->
-          <div class="col-md-6 col-lg-4 mb-5">
-              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                  </div>
-                  <img class="img-fluid" src="static/assets/img/portfolio/mascota2.jpg" alt="..." />
-              </div>
-          </div>
-          <!-- Portfolio Item 3-->
-          <div class="col-md-6 col-lg-4 mb-5">
-              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
-                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                  </div>
-                  <img class="img-fluid" src="static/assets/img/portfolio/mascota3.jpg" alt="..." />
-              </div>
-          </div>
-          <!-- Portfolio Item 4-->
-
-          <!-- Portfolio Item 5-->
-
-          <!-- Portfolio Item 6-->
-
-      </div>
-  </div>
-</section>
-
 
 <!-- About Section-->
 <section class="page-section bg-primary text-white mb-0" id="about">
@@ -207,7 +161,7 @@
 <header class="masthead bg-primary text-white text-center">
   <div class="container d-flex align-items-center flex-column">
       <!-- Masthead Avatar Image-->
-      <img class="masthead-avatar mb-5" src="static/assets/icon.png" alt="..." />
+      <img class="masthead-avatar mb-5" src="static/assets/icono.png" alt="..." />
       <!-- Masthead Heading-->
       <h1 class="masthead-heading text-uppercase mb-0"> Bienvenido a Refugio de Mascotas</h1>
       <!-- Icon Divider-->
@@ -220,59 +174,10 @@
       <p class="masthead-subheading font-weight-light mb-0">Proyectos aplicados a IE</p>
   </div>
 </header>
-<!-- Portfolio Section-->
-<section class="page-section mascotas" id="mascotas">
-  <div class="container">
-      <!-- Portfolio Section Heading-->
-      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Mascotas</h2>
-      <!-- Icon Divider-->
-      <div class="divider-custom">
-          <div class="divider-custom-line"></div>
-          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-          <div class="divider-custom-line"></div>
-      </div>
-      <!-- Portfolio Grid Items-->
-      <div class="row justify-content-center">
-          <!-- Portfolio Item 1-->
-          <div class="col-md-6 col-lg-4 mb-5">
-              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                  </div>
-                  <img class="img-fluid" src="static/assets/img/portfolio/mascota1.jpg" alt="..." />
-              </div>
-          </div>
-          <!-- Portfolio Item 2-->
-          <div class="col-md-6 col-lg-4 mb-5">
-              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                  </div>
-                  <img class="img-fluid" src="static/assets/img/portfolio/mascota2.jpg" alt="..." />
-              </div>
-          </div>
-          <!-- Portfolio Item 3-->
-          <div class="col-md-6 col-lg-4 mb-5">
-              <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
-                  <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                      <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                  </div>
-                  <img class="img-fluid" src="static/assets/img/portfolio/mascota3.jpg" alt="..." />
-              </div>
-          </div>
-          <!-- Portfolio Item 4-->
-
-          <!-- Portfolio Item 5-->
-
-          <!-- Portfolio Item 6-->
-
-      </div>
-  </div>
-</section>
 
 
 <!-- About Section-->
-<section class="page-section bg-primary text-white mb-0" id="about">
+<section class="page-section bg-secondary text-white mb-0" id="about">
   <div class="container">
       <!-- About Section Heading-->
       <h2 class="page-section-heading text-center text-uppercase text-white">Acerca de</h2>
@@ -291,7 +196,6 @@
 </section>
 <!-- Contact Section-->
 <section class="page-section" id="contact">
-  <div class="container">
       <!-- Contact Section Heading-->
       <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contactame</h2>
       <!-- Icon Divider-->
@@ -303,7 +207,8 @@
       <!-- Contact Section Form-->
       <div class="row justify-content-center">
           <div class="col-lg-8 col-xl-7">
-              <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+              <form id="contactForm" action="" method="POST" data-sb-form-api-token="API_TOKEN">
+                  {% csrf_token %}
                   <!-- Name input-->
                   <div class="form-floating mb-3">
                       <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />

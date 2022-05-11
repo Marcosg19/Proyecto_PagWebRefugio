@@ -1,0 +1,95 @@
+{% block content %}
+<div style="text-align: center;">
+    <h1>Listado de Mascotas</h1>
+	<h4>Cantidad de Mascotas:  {{cantidad}}</h4>
+</div>
+
+
+
+
+	
+</p>
+<style type="text/css"> 
+	.transformacion1 { text-transform: capitalize;}   
+	.transformacion2 { text-transform: uppercase;}   
+	.transformacion3 { text-transform: lowercase;}   
+	</style> 
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td># de ID</td>
+			<td>Nombre</td>
+			<td>Sexo</td>
+			<td>Edad</td>
+			<td>Fecha de Rescate</td>
+			<td>Vacunas</td>
+			<td>Adoptante</td>
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if Pets %}
+		{% for Pet in Pets %}
+		<tr>
+			<td>{{ Pet.id }}</td>
+			<td class="transformacion2">{{ Pet.nombre }}</td>
+			<td class="transformacion1">{{ Pet.sexo }}</td>
+			<td>{{ Pet.edad }}</td>
+			<td>{{ Pet.rescate }}</td>
+			<td>
+			<ul>{% for vacuna in Pet.vacuna.all %}
+				<li>
+					{{vacuna.nombre}}
+				</li>
+				{% endfor %}
+			</ul>
+    		</td>
+			{%if Pet.adopter.apellidos == "Disponible" %}
+            	<td>{{ Pet.adopter.lastName}}</td>
+            {% else %}
+				<td>{{ Pet.adopter.firstName }} {{ Pet.adopter.lastName }}</td>
+                               
+            {% endif %}
+
+
+			
+		
+			
+		</tr>
+
+
+
+
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de mascotas</h1>
+		{% endif %}
+
+
+
+	</tbody>
+
+
+
+
+
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Next</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+{% endblock%}

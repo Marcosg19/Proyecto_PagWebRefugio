@@ -1,9 +1,9 @@
 import os
-from unipath import Path
+from pathlib import Path
 from django.urls import reverse_lazy
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))#Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-d-sxsbci0zd_ee76ito+#6x7pinv!8a-7^zoqy85bh6$c(h3-n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -34,13 +34,18 @@ LOCAL_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
-    'captcha'
+    'axes',
+    'user_visit',
+    'import_export',
+    'simple_history',
+    'captcha',
 ]
 
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    'axes.middleware.AxesMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,6 +53,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
+    'user_visit.middleware.UserVisitMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'Proyecto.urls'
@@ -71,19 +79,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Proyecto.wsgi.application'
 
 
+
+
 # Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prueba2',
-        'USER': 'postgres',
-        'PASSWORD': 'marcos2001',
-        'HOST': 'localhost',
+        'NAME': 'prueba2',#os.environ.get('DB_NAME'),#
+        'USER': 'postgres',#os.environ.get('DB_USER'),#
+        'PASSWORD': 'marcos2001',#os.environ.get('DB_PASSWORD'),#
+        'HOST': 'localhost',#os.environ.get('DB_HOST'),
         'PORT': '5432',
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'apps.usuario.views.MyBackend',
 
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -93,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "OPTIONS":{'min_length':12},
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -115,6 +132,13 @@ AUTH_PASSWORD_VALIDATORS = [
         },
 ]
 
+
+AXES_FAILURE_LIMIT = 6
+AXES_LOCK_OUT_AT_FAILURE = True
+AXES_ONLY_USER_FAILURES = True
+AXES_LOCKOUT_TEMPLATE = 'bloqueo.html'
+AXES_RESET_ON_SUCCESS = True
+
 # Internationalization
 LANGUAGE_CODE = 'es-mx'
 
@@ -131,6 +155,7 @@ AUTH_USER_MODEL = 'usuario.User'
 
 
 STATIC_URL = 'static/'
+#STATIC_ROOT = '/code/static/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -149,8 +174,8 @@ APPEND_SLASH = False
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'refugiodeanimalesproyecto@gmail.com'
-EMAIL_HOST_PASSWORD = 'refugiomarcos'
+EMAIL_HOST_USER = 'refugiomascotasp@gmail.com'
+EMAIL_HOST_PASSWORD = 'refugio980mascotas'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 

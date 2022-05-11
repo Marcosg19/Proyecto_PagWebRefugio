@@ -1,0 +1,41 @@
+{% block content %}
+<head>
+    <div style="text-align: center;">
+        <h1>Listado de Solicitudes</h1>
+        <h4>Cantidad de Solicitudes:  {{cantidad}}</h4>
+    </div>
+</head>
+
+<body>
+    <br>
+    <div style="text-align:center;">
+        <table class="table table-striped" width="600" border="1" cellpadding="10" cellspacing="0" bordercolor="#000000" style="margin: 0 auto;" align="center">
+            <thead>
+                <tr>
+                    <th>No. Solicitud</th>
+                    <th>Adoptante</th>
+                    <th>Usuario</th>
+                    <th>Mascota solicitada</th>
+                    <th>Razones</th>
+                    
+                </tr>
+                
+            </thead>
+            <tbody>
+                    {% for Adoption in Adoptions %}
+                    <tr>
+                        <td>{{ Adoption.id }}</td>
+                        <td>{{ Adoption.firstName }} {{Adoption.lastName}}</td>
+                        <td>{{ Adoption.user }}</td>
+                        <td>{{ Adoption.Pet }}</td>
+                        <td>{{ Adoption.reason }}</td>
+                    
+                    </tr>
+                    {% endfor %}
+                
+                
+            </tbody>
+        </table> 
+    </div>
+</body>
+{% endblock%}
