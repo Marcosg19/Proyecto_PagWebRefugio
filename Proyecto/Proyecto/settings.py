@@ -78,18 +78,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Proyecto.wsgi.application'
 
-
-
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prueba2',#os.environ.get('DB_NAME'),#
-        'USER': 'postgres',#os.environ.get('DB_USER'),#
-        'PASSWORD': 'marcos2001',#os.environ.get('DB_PASSWORD'),#
-        'HOST': 'localhost',#os.environ.get('DB_HOST'),
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME'),#'prueba2',#
+        'USER': os.environ.get('DB_USER'),#'postgres',#
+        'PASSWORD': os.environ.get('DB_PASSWORD'),#'marcos2001',#
+        'HOST': os.environ.get('DB_HOST'),#'localhost',
+        ##'PORT': '5432',
     }
 }
 
@@ -154,8 +154,8 @@ USE_TZ = True
 AUTH_USER_MODEL = 'usuario.User'
 
 
-STATIC_URL = 'static/'
-#STATIC_ROOT = '/code/static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = '/code/static'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -163,7 +163,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+#STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
